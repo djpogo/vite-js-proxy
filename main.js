@@ -4,3 +4,7 @@ import './style.css'
 import loadPage from './vite.proxy';
 loadPage();
 /* * * * end of vite-proxy * * * */
+
+import moduleA from './js/module-a';
+
+moduleA();
