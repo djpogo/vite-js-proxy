@@ -1,5 +1,15 @@
+/**
+ * viteProxy function
+ * 
+ * on development this functions proxies the markup of the `PROXY_HOST` page into your browser
+ * on production an empty function is returned
+ */
 
-export function loadPage() {
+const mode = import.meta.env.MODE;
+const loadPage = 
+  mode === 'production' 
+  ? function() {}
+  : function loadPage() {
   fetch(`/proxy${document.location.pathname}`)
   .then((res) => res.text())
   .then((bodyText) => {
@@ -9,3 +19,5 @@ export function loadPage() {
     document.querySelector('#app').innerHTML = doc.querySelector('body').innerHTML;
   });
 }
+
+export default loadPage;

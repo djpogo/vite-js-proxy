@@ -13,6 +13,10 @@ For production you can execute `npm run build` and vite.js builds everything pro
 Before vite.js you may have had a webpack or rollup config within your project to build and run your frontend.
 Now it is the same, but blazingly fast.
 
+## How does the proxy work?
+
+On non production enviroments `[vite.proxy.js](./vite.proxy.js)` will proxy the markup of the `PROXY_HOST` into your vite hmr running browser. As long as the `proxied` page offers relative links `<a href="/relative-link">` and not `<a href="https://www.example.com/link">`, you are able to navigate though the vite hmr session through the proxy-page.
+
 ## Configuration
 
 make a copy of the `.env` file and provide the neccessary values.

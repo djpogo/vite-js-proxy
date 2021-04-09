@@ -1,8 +1,6 @@
 import './style.css'
-import { loadPage } from './viteProxy';
 
-const mode = import.meta.env.MODE;
-
-if (mode !== 'production') {
-  loadPage();
-}
+/* * * * vite-proxy do not remove!!! * * * */
+import loadPage from './vite.proxy';
+loadPage();
+/* * * * end of vite-proxy * * * */
