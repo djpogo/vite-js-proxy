@@ -1,3 +1,3 @@
 export default function() {
-    alert('js/module-ajs: Hello World');
+	console.info('js/module-a.js is loaded');
 }
