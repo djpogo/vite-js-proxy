@@ -1,10 +1,10 @@
 # vite-js-proxy
 
-Use the super powers of [vite.js](https://vitejs.dev) to frontend tool any running website.
+Use the super powers of [vite.js](https://vitejs.dev)🚀 to frontend tool any running website.
 
 ## Usecase
 
-You have classic server side rendered website driven by Java or PHP and you want to add the lightweight, fast frontend tooling vite.js offers?
+You have classic server side rendered website driven by Java/PHP/something else and you want to add the lightweight, fast frontend tooling vite.js offers?
 
 You setup your **donor host** whose markup you want to style. For local development a proxy is setup, that you can navigate through the **donor host site** but **css and js is injected via vite.js** and thus really speedy.
 
