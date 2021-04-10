@@ -1,4 +1,4 @@
-# vite-proxy
+# vite-js-proxy
 
 Use the super powers of [vite.js](https://vitejs.dev) to frontend tool any running website.
 
@@ -15,11 +15,11 @@ Now it is the same, but blazingly fast.
 
 ## How does the proxy work?
 
-On non production enviroments `[vite.proxy.js](./vite.proxy.js)` will proxy the markup of the `PROXY_HOST` into your vite hmr running browser. As long as the `proxied` page offers relative links `<a href="/relative-link">` and not `<a href="https://www.example.com/link">`, you are able to navigate though the vite hmr session through the proxy-page.
+On non production environments `[vite.proxy.js](./vite.proxy.js)` will proxy the markup of the `PROXY_HOST` into your vite hmr running browser. As long as the `proxied` page offers relative links `<a href="/relative-link">` and not `<a href="https://www.example.com/link">`, you are able to navigate though the vite hmr session through the proxy-page.
 
 ## Configuration
 
-make a copy of the `.env` file and provide the neccessary values.
+make a copy of the `.env` file and provide the necessary values.
 
 ### PROXY_TARGET
 
@@ -27,10 +27,10 @@ make a copy of the `.env` file and provide the neccessary values.
 
 for example `PROXY_TARGET=https://www.exmaple.com`.
 
-### PROXY_PATH
+### VITE_APP_PROXY_PATH
 
-`PROXY_PATH` defines the _local_ path vite-proxy will use to call the running website.
+`VITE_APP_PROXY_PATH` defines the _local_ path vite-js-proxy will use to call the running website.
 
-for example `PROXY_PATH=/proxy/`.
+for example `VITE_APP_PROXY_PATH=/proxy/`.
 
-The `PROXY_PATH` property will be removed when calling the website.
+The `VITE_APP_PROXY_PATH` property will be removed when calling the website.

@@ -1,6 +1,6 @@
 const config = require('dotenv').config();
 const proxyTarget = process.env.PROXY_TARGET;
-const proxyPath = process.env.PROXY_PATH;
+const proxyPath = process.env.VITE_APP_PROXY_PATH;
 
 const proxy = {};
 proxy[proxyPath] = {
