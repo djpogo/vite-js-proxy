@@ -15,11 +15,11 @@ Now it is the same, but blazingly fast.
 
 ## How does the proxy work?
 
-On non production environments `[vite.proxy.js](./vite.proxy.js)` will proxy the markup of the `PROXY_HOST` into your vite hmr running browser. As long as the `proxied` page offers relative links `<a href="/relative-link">` and not `<a href="https://www.example.com/link">`, you are able to navigate though the vite hmr session through the proxy-page.
+On non production environments [`vite.proxy.js`](./vite.proxy.js) will proxy the markup of the `PROXY_HOST` into your vite hmr running browser. As long as the `proxied` page offers relative links `<a href="/relative-link">` and not `<a href="https://www.example.com/link">`, you are able to navigate though the vite hmr session through the proxy-page.
 
 ## Configuration
 
-Have a look at the `[proxy.config.json](./proxy.config.json)` file and adjust the settings to your needs.
+Have a look at the [`proxy.config.json`](./proxy.config.json) file and adjust the settings to your needs.
 
 ### target {String}
 ``` javascript
