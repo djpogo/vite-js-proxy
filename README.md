@@ -19,18 +19,49 @@ On non production environments `[vite.proxy.js](./vite.proxy.js)` will proxy the
 
 ## Configuration
 
-make a copy of the `.env` file and provide the necessary values.
+Have a look at the `[proxy.config.json](./proxy.config.json)` file and adjust the settings to your needs.
 
-### PROXY_TARGET
+### target {String}
+``` javascript
+// proxy.config.json
+{
+	"target": "https://example.com"
+}
+```
+Enter the URL you want to proxy into vite development server. For example `http://localhost:8000` if your application server is running there.
 
-`PROXY_TARGET` defines the url of the website you want to be proxied into your browser.
+### proxyPath {String}
+```javascript
+// proxy.config.json
+{
+	"proxyPath": "/proxy/"
+}
+```
+This is the path, where the vite js dev server will proxy the application server data through. Make sure that this path does not exists as a real path in your application, otherwise it will come to conflicts between the vite dev server and your application server.
 
-for example `PROXY_TARGET=https://www.exmaple.com`.
+### addBaseTag {Boolean}
+```javascript
+// proxy.config.json
+{
+	"addBaseTag": true
+}
+```
+This flags adds a `<base href="${proxyPath}">` to the vite js dev server DOM.
 
-### VITE_APP_PROXY_PATH
+### proxyRewriteSelector {String}
+```javascript
+// proxy.config.json
+{
+	"proxyRewriteSelector": "[src^='/']"
+}
+```
+This string is entered into `document.querySelectorAll()` call on the proxied markup, to rewrite image-path(s) and other src attributes.
 
-`VITE_APP_PROXY_PATH` defines the _local_ path vite-js-proxy will use to call the running website.
-
-for example `VITE_APP_PROXY_PATH=/proxy/`.
-
-The `VITE_APP_PROXY_PATH` property will be removed when calling the website.
+### proxyIgnoreTags [Array({String})]
+```javascript
+// proxy.config.json
+{
+	"proxyIgnoreTags": ["script"]
+}
+```
+Every entry of this array, will be `element.matches()` against every element queried by the `proxyrewriteSelector` result. If it succeed the `src` attribute will not be prefixed with the `proxyPath`.

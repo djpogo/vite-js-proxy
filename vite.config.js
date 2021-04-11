@@ -1,10 +1,11 @@
-const config = require('dotenv').config();
-const proxyTarget = process.env.PROXY_TARGET;
-const proxyPath = process.env.VITE_APP_PROXY_PATH;
+const {
+	proxyPath,
+	target
+} = require('./proxy.config.json');
 
 const proxy = {};
 proxy[proxyPath] = {
-    target: proxyTarget,
+    target: target,
     changeOrigin: true,
     rewrite: (path) => path.replace(new RegExp(`^${proxyPath}`), ''),
 };

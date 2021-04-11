@@ -1,0 +1,7 @@
+{
+	"target": "https://www.example.com",
+	"proxyPath": "/proxy/",
+	"addBaseTag": true,
+	"proxyRewriteSelector": "[src^='/']",
+	"proxyIgnoreTags": ["script"]
+}
