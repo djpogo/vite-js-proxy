@@ -1,21 +1,36 @@
 # vite-js-proxy
 
-Use the super powers of [vite.js](https://vitejs.dev)🚀 to frontend tool any running website.
+Use the superpowers of [vite.js](https://vitejs.dev)🚀 to frontend tool any running website.
+
+> **DISCLAIMER:** work in progress! This repository was not yet tested in a real project and may lack functionality.
 
 ## Usecase
 
-You have classic server side rendered website driven by Java/PHP/something else and you want to add the lightweight, fast frontend tooling vite.js offers?
+These days not every web app is api-driven and created using a frontend framework with nice tooling. HTML exists, which is rendered by a PHP/Java/Python/something process and you do not want to deep dive into that server process to write CSS and JavaScript.
 
-You setup your **donor host** whose markup you want to style. For local development a proxy is setup, that you can navigate through the **donor host site** but **css and js is injected via vite.js** and thus really speedy.
+So let us take [vite.js](https://vitejs.dev) and proxy our server-generated markup into the vite.js environment and have a snappy frontend developing experience.
 
-For production you can execute `npm run build` and vite.js builds everything production ready.
+A little configuration is needed, but then you are up and running.
 
-Before vite.js you may have had a webpack or rollup config within your project to build and run your frontend.
-Now it is the same, but blazingly fast.
+In production you can execute `npm run build` and vite.js builds everything production ready.
+
+> **DISCLAIMER:** right now, nothing is tested for production use. Please get in touch with me if you run into trouble.
 
 ## How does the proxy work?
 
-On non production environments [`vite.proxy.js`](./vite.proxy.js) will proxy the markup of the `PROXY_HOST` into your vite hmr running browser. As long as the `proxied` page offers relative links `<a href="/relative-link">` and not `<a href="https://www.example.com/link">`, you are able to navigate though the vite hmr session through the proxy-page.
+On non-production environments, [`vite.proxy.js`](./vite.proxy.js) will proxy the markup of the `proxy.config.json#target` into your vite hmr running browser. As long as the `proxied` page offers relative links `<a href="/relative-link">` and not `<a href="https://www.example.com/link">` you can navigate through the vite hmr session through the proxy-page.
+
+Every CSS/JavaScript change you made will immediately land in your browser!
+
+On the production system, the [vite.proxy.js](./vite.proxy.js#L20) script exports an empty function so no proxy code will be executed on production systems.
+
+## setup
+
+* Copy the content of this repository into your project.
+* edit [proxy.config.json](./proxy.config.json) to your needs
+* execute `npm install`
+* execute `npm run dev`
+* build your frontend
 
 ## Configuration
 
@@ -28,7 +43,7 @@ Have a look at the [`proxy.config.json`](./proxy.config.json) file and adjust th
 	"target": "https://example.com"
 }
 ```
-Enter the URL you want to proxy into vite development server. For example `http://localhost:8000` if your application server is running there.
+Enter the URL you want to proxy into vite development server. Try `http://localhost:8000` if your application server is running there.
 
 ### proxyPath {String}
 ```javascript
@@ -37,7 +52,7 @@ Enter the URL you want to proxy into vite development server. For example `http:
 	"proxyPath": "/proxy/"
 }
 ```
-This is the path, where the vite js dev server will proxy the application server data through. Make sure that this path does not exists as a real path in your application, otherwise it will come to conflicts between the vite dev server and your application server.
+This value is used to _tunnel_ the data from the application server through. If this path exists as a real route in your application, you want to change it. Every URI-conform value is possible.
 
 ### addBaseTag {Boolean}
 ```javascript
@@ -55,7 +70,7 @@ This flags adds a `<base href="${proxyPath}">` to the vite js dev server DOM.
 	"proxyRewriteSelector": "[src^='/']"
 }
 ```
-This string is entered into `document.querySelectorAll()` call on the proxied markup, to rewrite image-path(s) and other src attributes.
+This string is entered into `document.querySelectorAll()` call on the proxied markup to rewrite image-path(s) and other src attributes.
 
 ### proxyIgnoreTags [Array({String})]
 ```javascript
@@ -64,4 +79,4 @@ This string is entered into `document.querySelectorAll()` call on the proxied ma
 	"proxyIgnoreTags": ["script"]
 }
 ```
-Every entry of this array, will be `element.matches()` against every element queried by the `proxyrewriteSelector` result. If it succeed the `src` attribute will not be prefixed with the `proxyPath`.
+Every entry of this array, will be `element.matches()` against every element queried by the `proxyrewriteSelector` result. If it succeeds the `src` attribute will not be prefixed with the `proxyPath`.
