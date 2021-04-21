@@ -1,8 +1,9 @@
 /**
  * viteProxy function
  *
- * on development this functions proxies the markup of the `PROXY_HOST` page into your browser
- * on production an empty function is returned
+ * on development this functions proxies the markup of the `target`
+ * page into your browser on production an empty function is returned
+ * @see `proxy.config.json`
  */
 
 const mode = import.meta.env.MODE;
