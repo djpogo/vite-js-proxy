@@ -7,7 +7,7 @@
 	"proxyRoutes": [
 		{
 			"path": "/api/",
-			"target": "https://www.example.com",
+			"target": "https://api.example.com",
 			"options": {
 				"changeOrigin": true
 			}

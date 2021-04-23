@@ -1,9 +1,9 @@
-import proxy from './vite-proxy/proxyBuilder';
+import viteProxy from './vite-proxy/proxyBuilder';
 
 export default {
 	server: {
 		proxy: {
-			...proxy
+			...viteProxy
 		}
 	}
 }

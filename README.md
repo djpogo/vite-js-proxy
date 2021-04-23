@@ -14,7 +14,7 @@ A little configuration is needed, but then you are up and running.
 
 In production you can execute `npm run build` and vite.js builds everything production ready.
 
-> **DISCLAIMER:** right now, nothing is tested for production use. Please get in touch with me if you run into trouble.
+> **DISCLAIMER:** right now, nothing is tested for production use. Please get in touch with [me](https://raoulkramer.de) if you run into trouble.
 
 ## How does the proxy work?
 
@@ -72,11 +72,43 @@ This flags adds a `<base href="${proxyPath}">` to the vite js dev server DOM.
 ```
 This string is entered into `document.querySelectorAll()` call on the proxied markup to rewrite image-path(s) and other src attributes.
 
-### proxyIgnoreTags [Array({String})]
+### proxyIgnoreTags {Array({String})}
 ```javascript
 // proxy.config.json
 {
 	"proxyIgnoreTags": ["script"]
 }
 ```
-Every entry of this array, will be `element.matches()` against every element queried by the `proxyrewriteSelector` result. If it succeeds the `src` attribute will not be prefixed with the `proxyPath`.
+Every entry of this array will be `element.matches()` against every element queried by the `proxyrewriteSelector` result. If it succeeds the `src` attribute will not be prefixed with the `proxyPath`.
+
+### proxyRoutes {Array[{Object}]}
+``` javascript
+{
+	…,
+	"proxyRoutes": [
+		{
+			"path": "/api/"
+		}
+	]
+}
+```
+This array configures custom user proxy rules, for example to make your api route accesible to the vite process.
+
+The simplest configuration is shown above, this route will be proxied 1:1 to your `target` configuration.
+
+A more complex configuration looks like this:
+``` javascript
+{
+	…,
+	"proxyRoutes": [
+		{
+			"path": "/api/",
+			"target": "https://www.example.com",
+			"options": {
+				"changeOrigin": true
+			}
+		}
+	]
+}
+```
+when you want to address a different `target` server for this route. All `options` will be merged into the proxy configuration of this `path`.
