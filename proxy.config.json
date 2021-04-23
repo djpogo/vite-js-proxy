@@ -3,5 +3,14 @@
 	"proxyPath": "/proxy/",
 	"addBaseTag": true,
 	"proxyRewriteSelector": "[src^='/']",
-	"proxyIgnoreTags": ["script"]
+	"proxyIgnoreTags": ["script"],
+	"proxyRoutes": [
+		{
+			"path": "/api/",
+			"target": "https://www.example.com",
+			"options": {
+				"changeOrigin": true
+			}
+		}
+	]
 }

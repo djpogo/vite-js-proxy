@@ -1,7 +1,7 @@
 import './style.css'
 
 /* * * * vite-proxy do not remove!!! * * * */
-import loadPage from './vite.proxy';
+import loadPage from './vite-proxy/loadPage';
 loadPage();
 /* * * * end of vite-proxy * * * */
 

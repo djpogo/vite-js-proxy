@@ -1,17 +1,9 @@
-const {
-	proxyPath,
-	target
-} = require('./proxy.config.json');
-
-const proxy = {};
-proxy[proxyPath] = {
-    target: target,
-    changeOrigin: true,
-    rewrite: (path) => path.replace(new RegExp(`^${proxyPath}`), ''),
-};
+import proxy from './vite-proxy/proxyBuilder';
 
 export default {
-    server: {
-        proxy
-    }
+	server: {
+		proxy: {
+			...proxy
+		}
+	}
 }
