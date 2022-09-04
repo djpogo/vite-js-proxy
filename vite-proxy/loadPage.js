@@ -24,8 +24,9 @@ const loadPage =
 	: function loadPage() {
 		const { pathname } = document.location;
 		// check that user custom proxy routes not tunneld through markup proxy
-		if (pRoutes.find(route => route?.path === pathname)) {
-			console.info(`${pathname} looks like a user custom proxy route and is not markup tunneled`);
+		const customProxyRoute = pRoutes.find(route => pathname.startsWith(route?.path));
+		if (customProxyRoute) {
+			console.info(`"${pathname}" looks like user custom proxy route "${customProxyRoute.path}" and is not markup tunneled`);
 			return;
 		}
 		fetch(`${proxyPath}${pathname}`)
